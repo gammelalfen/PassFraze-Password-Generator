@@ -3,32 +3,41 @@
 import random
 import tkinter as tk
 
+
 # Password security configuration
 
 # GUI settings
 root = tk.Tk()
-root.title("Password Generator")
-root.minsize(400, 400)
+root.title("PassFraze Password Generator")
+root.minsize(800, 800)
 root.resizable(False, False)
+root.configure(background='AntiqueWhite1')
 
-lbl_result = tk.Label(text='', pady=100)
+# Logo Image
+# Imports the logo image and resizes it
+img_logo = tk.PhotoImage(file="van_der_graaf_generator_v2.png").subsample(10, 10)
+lbl_logo = tk.Label(root, image=img_logo, height=200, width=200, text="PassFraze Password Generator", background='AntiqueWhite2')
+lbl_logo.pack()
+
+lbl_result = tk.Label(text='', pady=10, padx=100, bg='AntiqueWhite4', fg='White')
 lbl_result.pack()
 
 chk_comp_special_char_var = tk.BooleanVar(value=True)
 chk_comp_alphanum_char_var = tk.BooleanVar(value=True)
 
 chk_comp_special_char = tk.Checkbutton(root, text="Special characters (such as: '*', '^' or '!' etc) ",
-                                       variable=chk_comp_special_char_var)
+                                       variable=chk_comp_special_char_var, bg='AntiqueWhite1')
 chk_comp_special_char.pack()
 
-chk_comp_alphanum_char = tk.Checkbutton(root, text="Alphanumeric characters", variable=chk_comp_alphanum_char_var)
+chk_comp_alphanum_char = tk.Checkbutton(root, text="Alphanumeric characters", variable=chk_comp_alphanum_char_var,
+                                        bg='AntiqueWhite1')
 chk_comp_alphanum_char.pack()
 
-lbl_length = tk.Label(root, text="Enter the desired password length:")
+lbl_length = tk.Label(root, text="Enter the desired password length:", bg='AntiqueWhite1')
 
 # Variable needed to set default pw length in the spinbox
 default_length = tk.IntVar(root)
-default_length.set(20)
+default_length.set(12)
 
 # Box to configure the length of the pw
 spinbox_length = tk.Spinbox(
@@ -36,7 +45,7 @@ spinbox_length = tk.Spinbox(
     from_=1,
     to=100,
     increment=1,
-    text='Enter the desired password length (default is 16 characters)',
+#    text='Enter the desired password length (default is 16 characters)',
     textvariable=default_length)
 
 lbl_length.pack()
@@ -166,7 +175,7 @@ btn_generate_password = tk.Button(
     text="Click to generate password",
     width=25,
     height=5,
-    bg="gray",
+    bg="AntiqueWhite4",
     fg="yellow",
     command=update_label
 )
