@@ -22,6 +22,18 @@ lbl_logo.pack()
 lbl_result = tk.Label(text='', pady=10, padx=100, bg='AntiqueWhite4', fg='White')
 lbl_result.pack()
 
+# Settings buttons
+
+# Setting password type
+rad_pw_type = tk.StringVar()
+
+rad_pw_type_string = tk.Radiobutton(root, text="Password Type: String", variable=rad_pw_type, value='String', bg='AntiqueWhite1')
+rad_pw_type_string.pack()
+
+rad_pw_type_phrase = tk.Radiobutton(root, text= "Password Type: Phrase", variable= rad_pw_type, value='Passphrase', bg='AntiqueWhite1')
+rad_pw_type_phrase.pack()
+
+# Setting password complexity
 chk_comp_special_char_var = tk.BooleanVar(value=True)
 chk_comp_alphanum_char_var = tk.BooleanVar(value=True)
 
@@ -32,6 +44,7 @@ chk_comp_special_char.pack()
 chk_comp_alphanum_char = tk.Checkbutton(root, text="Alphanumeric characters", variable=chk_comp_alphanum_char_var,
                                         bg='AntiqueWhite1')
 chk_comp_alphanum_char.pack()
+
 
 lbl_length = tk.Label(root, text="Enter the desired password length:", bg='AntiqueWhite1')
 
@@ -45,7 +58,6 @@ spinbox_length = tk.Spinbox(
     from_=1,
     to=100,
     increment=1,
-#    text='Enter the desired password length (default is 16 characters)',
     textvariable=default_length)
 
 lbl_length.pack()
@@ -148,10 +160,11 @@ def generate_passphrase(word_amount, delimiter):
     return passphrase_str
 print(generate_passphrase(5, '-'))
 
-password_type = 'Passphrase'
+
 
 # Function needed to use in the command= argument, didn't work otherwise
 def update_label():
+    password_type = rad_pw_type.get()
     length = int(spinbox_length.get())  # Get updated value from spinbox
     if password_type != 'Passphrase':
         use_special = chk_comp_special_char_var.get()
